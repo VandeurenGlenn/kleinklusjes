@@ -1,13 +1,13 @@
-<link rel="import" href="../../bower_components/polymer/polymer-micro.html">
-<link rel="import" href="/dist/kleinklusjes-data.html">
-<link rel="import" href="/src/behaviors/image-collection-behavior.html">
-<link rel="import" href="../../bower_components/iron-media-query/iron-media-query.html">
-<link rel="import" href="/bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="/bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="/bower_components/app-layout/app-toolbar/app-toolbar.html">
-<link rel="import" href="/bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
-<link rel="import" href="/bower_components/app-layout/app-scroll-effects/effects/resize-title.html">
-<link rel="import" href="/bower_components/app-layout/app-scroll-effects/effects/blend-background.html">
+<link rel="import" href="../bower_components/polymer/polymer-micro.html">
+<link rel="import" href="../dist/kleinklusjes-data.html">
+<link rel="import" href="behaviors/image-collection-behavior.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/resize-title.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/blend-background.html">
 <link rel="import" href="styles/theme.html">
 <link rel="import" href="ui/kk-icons.html">
 <link rel="import" href="ui/kk-section.html">
@@ -210,7 +210,7 @@
       },
 
       _handleError: function(event) {
-        this.errorToast.show(`${event.detail.code}: ${event.detail.message}`);
+        this.errorToast.show(event.detail.code + ': ' + event.detail.message);
       },
 
       showToast: function(event) {
