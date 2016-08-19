@@ -1,0 +1,300 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="/bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="/bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="/src/behaviors/error-behavior.html">
+<dom-module id="kk-contact">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      .contact-wrapper {
+        width: 100%;
+        padding: 32px;
+      }
+      .left, .right {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .right {
+        flex-direction: row;
+      }
+      form {
+        width: 100%;
+        height: 100%;
+      }
+      paper-textarea, paper-input, .input-wrapper {
+        width: 100%;
+        min-width: 182px;
+        /*max-width: 512px;*/
+      }
+      p {
+        @apply(--kk-text);
+      }
+      h1, h3 {
+        @apply(--kk-title);
+      }
+      .headline {
+        @apply(--kk-headline);
+      }
+      .panel, .fab-container {
+        @apply(--horizontal);
+        width: 100%;
+      }
+      .center-center {
+        align-items: center;
+        justify-content: center;
+      }
+      .flex {
+        display: flex;
+        flex: 1;
+        width: 100%;
+      }
+      .top {
+        padding-bottom: 16px;
+      }
+      .fab-container {
+        padding: 64px;
+        box-sizing: border-box;
+      }
+      .input-wrapper {
+        padding-top: 32px;
+      }
+      paper-fab {
+        --paper-fab-keyboard-focus-background: var(--focus-background);
+        --paper-fab-background: var(--kk-accent);
+      }
+      paper-input, paper-textarea {
+        --paper-input-container-label {
+          color: var(--primary-light-text-color);
+        }
+        --paper-input-container-label-floating: {
+          color: #00BCD4 !important;
+        };
+        --paper-input-container-underline: {
+          background: #00BCD4;
+        };
+        --paper-input-container-underline-focus: {
+          background: var(--focus-background);
+        };
+      }
+      .title {
+        @apply(--kk-title);
+        color: var(--primary-light-text-color);
+      }
+      .headline-container {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        line-height: 24px;
+        font-size: 24px;
+        color: var(--secondary-light-text-color);
+      }
+      .headline {
+        @apply(--kk-headline);
+        color: var(--secondary-light-text-color);
+      }
+      .contact-info-item .headline {
+        font-size: 24px;
+        line-height: 24px;
+        padding-left: 0.4em;
+        opacity: 1;
+        transform: scaleX(1);
+        width: auto;
+        -webkit-transition: -webkit-transform 0.3s, opacity 0.3s, width 0.3s;
+        transition: transform 0.3s, opacity 0.3s, width 0.3s;
+        will-change: opacity, width, transform;
+      }
+      .contact-info-item {
+        display: flex;
+        flex-direction: column;
+        padding-top: 1.2em;
+      }
+      @media (min-width: 960px) {
+        .input-wrapper {
+          display: flex;
+          flex-direction: row;
+          box-sizing: border-box;
+        }
+        paper-input:first-child {
+          padding-right: 32px;
+        }
+        paper-textarea {
+          padding-top: 64px;
+        }
+      }
+      @media (max-width: 819px) {
+        .panel {
+          display: flex;
+          flex-direction: column;
+        }
+        .left, .right {
+          width: 100%;
+          flex-direction: column;
+        }
+        .contact-info-item {
+          display: flex;
+          flex-direction: row;
+          align-items: flex-end;
+        }
+        .contact-info-item .headline {
+          opacity: 0;
+          width: 0;
+          transform: scaleX(0);
+          -webkit-transition: none;
+          transition: none;
+        }
+        .contact-info-item .headline::after {
+          content: ':';
+        }
+        .contact-info-item p {
+          font-size: 20px;
+          margin: 0;
+          padding-bottom: 0;
+        }
+        .contact-wrapper {
+          padding: 0;
+        }
+        kk-section ::content .content {
+          padding-bottom: 16px;
+        }
+      }
+    </style>
+
+    <kk-section center-content>
+      <div class="contact-wrapper">
+        <div class="top">
+          <h1 class="title">GET IN TOUCH</h1>
+          <h2 class="headline">contacteer me zodat we samen een oplossing kunnen zoeken.</h2>
+        </div>
+        <div class="panel">
+          <div class="left">
+            <form action="http://contact.16mb.com/keinklusjes/contact-form-handler.php" method="post">
+              <div class="input-wrapper">
+                <paper-input id="name" label="naam" type="text" error-message="Invalid input!" auto-validate autocomplete autocorrect required></paper-input>
+                <paper-input id="email" label="e-mail" type="email" error-message="Invalid input!" auto-validate autocomplete autocorrect required></paper-input>
+              </div>
+              <paper-textarea id="message" label="bericht" error-message="Invalid input!" char-counter auto-validate autocomplete autocorrect></paper-textarea>
+            </form>
+            <div class="fab-container center-center">
+              <paper-fab icon="send" on-tap="send"></paper-fab>
+            </div>
+          </div>
+          <div class="right">
+            <span class="flex"></span>
+            <div class="text-container">
+              <span class="contact-info-item">
+                <span class="headline-container">
+                  <iron-icon icon="call" title="Mobiele telefoon nummer"></iron-icon>
+                  <span class="headline">Telefoon</span>
+                </span>
+                <p>+32 484 78 46 98</p>
+              </span>
+              <span class="contact-info-item">
+                <span class="headline-container">
+                  <iron-icon icon="email" title="Mail adres"></iron-icon>
+                  <span class="headline">Email</span>
+                </span>
+                <p>
+                  info@kleinklusjes.be
+                </p>
+              </span>
+              <span class="contact-info-item">
+                <span class="headline-container">
+                  <iron-icon icon="home" title="Adres"></iron-icon>
+                  <span class="headline">Adres</span>
+                </span>
+                <p>
+                  Koetsweg 2,3460 Assent -Bekkevoort
+                </p>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </kk-section>
+
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'kk-contact',
+        behaviors: [Kk.ErrorBehavior],
+        properties: {
+          smallScreen: {
+            type: Object,
+            value: true,
+            reflectToAttribute: true
+          }
+        },
+
+        get _form() {
+          return this.querySelector('form') ;
+        },
+
+        get _nameInvalid() {
+          return this.__valid('name')
+        },
+
+        get _emailInvalid() {
+          return this.__valid('email');
+        },
+
+        get _messageInvalid() {
+          return this.__valid('message');
+        },
+
+        __valid: function(target) {
+          if (this.$[target].value) {
+            return this.$[target].invalid ? false : true;
+          } else if(!this.$[target].value) {
+            this.$[target].invalid = true;
+            return false;
+          } else {
+            return true;
+          }
+        },
+
+        valid: function() {
+          return this._nameInvalid || this._emailInvalid || this._messageInvalid || false;
+        },
+
+        send: function() {
+          if (!this.valid()) {
+            var newError = new Error();
+            var error = {
+              code: 'E01',
+              message: 'Invalid input',
+              stack: newError.stack
+            }
+            this.fireError(error);
+            return;
+          }
+          var form = new FormData(this._form);
+          fetch('https://kleinklusjes.byethost7.com/contact/contact-form-handler.php', {
+            method: "POST",
+            mode: 'no-cors',
+            body: form
+          });
+          this.async(function() {
+            this.fire('show-toast', 'email verzonden.');
+            this._defaultFormValues();
+          }, 100);
+          return;
+        },
+
+        _defaultFormValues: function() {
+          // this.$.name.value = '';
+          // this.$.email.value = '';
+          // this.$.message.value = '';
+        }
+
+      });
+    })();
+  </script>
+</dom-module>

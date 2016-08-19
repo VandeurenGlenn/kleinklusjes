@@ -1,0 +1,81 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<dom-module id="kk-circle">
+  <template>
+    <style>
+      :host {
+        display: flex;
+        border-radius: 50%;
+        overflow: hidden;
+        height: 236px;
+        width: 100%;
+        max-width: 236px;
+      }
+    </style>
+    <content></content>
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'kk-circle',
+
+        properties: {
+          /**
+           * @type {boolean} autoSize auto sizes the element when true
+           */
+          autoSize: {
+            type: Boolean,
+            value: true
+          },
+
+          size: {
+            type: Number,
+            value: 24
+          },
+
+          src: String,
+          preload: String
+        },
+
+        observers: [
+          '__sizeChanged(size, autoSize)'
+        ],
+
+        get _imgElement() {
+          var img = this.querySelector('img');
+          if (!img) {
+            img = document.createElement('img');
+            img.onload = this._imgLoaded();
+            img.style.width = '100%';
+            Polymer.dom(this).appendChild(img);
+          }
+          return img;
+        },
+
+        set preload(base64) {
+          if (base64) {
+            this.style.background = 'url(' + base64 + ')';
+            this.style.backgroundSize = 'cover';
+            this.style.backgroundRepeat = 'no-repeat';
+          }
+        },
+
+        set src(url) {
+          this._imgElement.src = url;
+        },
+
+        _imgLoaded: function() {
+          this.style.background = null;
+        },
+
+        __sizeChanged: function(size, auto) {
+          if (!auto && size) {
+            this.style.height = size + 'px;';
+            this.style.width = size + 'px';
+          }
+        }
+      });
+    })();
+  </script>
+</dom-module>

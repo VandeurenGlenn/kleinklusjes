@@ -1,0 +1,222 @@
+<link rel="import" href="../../bower_components/polymer/polymer-micro.html">
+<link rel="import" href="/dist/kleinklusjes-data.html">
+<link rel="import" href="/src/behaviors/image-collection-behavior.html">
+<link rel="import" href="../../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="/bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="/bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="/bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="/bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="/bower_components/app-layout/app-scroll-effects/effects/resize-title.html">
+<link rel="import" href="/bower_components/app-layout/app-scroll-effects/effects/blend-background.html">
+<link rel="import" href="styles/theme.html">
+<link rel="import" href="ui/kk-icons.html">
+<link rel="import" href="ui/kk-section.html">
+<link rel="import" href="sections/kk-sections.html">
+<link rel="import" href="ui/kk-circle.html">
+<link rel="import" href="ui/kk-image.html">
+<link rel="import" href="ui/kk-footer.html">
+<link rel="import" href="ux/kk-toast.html">
+<link rel="import" href="ux/kk-error-toast.html">
+
+<dom-module id="kleinklusjes-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+        font-family: 'Roboto';
+      }
+      a {
+        text-decoration: none;
+        color: var(--primary-light-text-color);
+        padding: 0 16px;
+      }
+      app-header {
+        --app-header-background-rear-layer: {
+          background-color: #888;
+        };
+        /*--app-header-background-front-layer: {
+          background-image: url(...);
+        };*/
+      }
+      .headline {
+        @apply(--kk-light-headline);
+      }
+      .title-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+      .route-seperator {
+        padding: 0 8px;
+      }
+      [condensed-title], [main-title] {
+        @apply(--kk-light-title);
+      }
+
+      [condensed-title], .headline {
+        font-size: 22px;
+      }
+      [main-title] {
+        font-size: 96px;
+        padding:0 16px;
+        box-sizing:border-box;
+        text-align: right;
+      }
+      @media (max-width: 719px) {
+        [main-title] {
+          font-size: 64px;
+        }
+      }
+      @media (min-width: 1200px) {
+        .title-container {
+          min-width: 1200px;
+        }
+      }
+    </style>
+    <iron-media-query query="max-width: 819px" query-matches="{{smallScreen}}"></iron-media-query>
+    <iron-media-query query="max-width: 519px" query-matches="{{verySmallScreen}}"></iron-media-query>
+    <kleinklusjes-data images="{{images}}"></kleinklusjes-data>
+    <app-header-layout>
+      <app-header style="height: 320px;" fixed condenses effects="waterfall resize-title blend-background">
+        <app-toolbar sticky>
+          <div condensed-title>
+            Kleinklusjes
+            <template is="dom-if" if="[[!smallScreen]]">
+              <span class="route-seperator">-</span> <span class="headline">Klein klusjes voor klein geld</span>
+            </template>
+          </div>
+          <template is="dom-if" if="[[!verySmallScreen]]">
+            <a href="#wie">Wie</a>
+            <!-- <a href="#wat">Wat</a> -->
+            <a href="#klusjes">klusjes</a>
+            <a href="#contact">contact</a>
+          </template>
+        </app-toolbar>
+        <app-toolbar></app-toolbar>
+        <app-toolbar>
+          <div class="title-wrapper"  style="display: flex;flex-direction:row;align-items:center;justify-content:center;width:100%;">
+            <div class="title-container">
+              <div main-title>
+                Kleinklusjes
+                <h2 class="headline">Klein klusjes voor klein geld</h2>
+              </div>
+            </div>
+          </div>
+
+        </app-toolbar>
+        <app-toolbar></app-toolbar>
+      </app-header>
+      <kk-sections images="[[images]]" small-screen="[[smallScreen]]" on-error="_handleError" on-show-toast="showToast"></kk-sections>
+      <kk-footer></kk-footer>
+    </app-header-layout>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'kleinklusjes-app',
+      behaviors: [Basicelements.ImageCollectionBehavior],
+
+      properties: {
+        data: {
+          type: Object,
+          value: {images: {}}
+        },
+
+        temporaryData: {
+          type: Object,
+          value: {images: []}
+        },
+
+        headerPlaceholder: {
+          type: String,
+          computed: 'computePlaceholder(images, "header")'
+        },
+
+        headerImage: {
+          type: String,
+          computed: 'computeImage(images, "header")'
+        },
+
+        headerImageLoaded: {
+          type: Boolean,
+          value: false
+        },
+
+        smallScreen: {
+          type: Boolean,
+          value: true
+        }
+      },
+
+      observers: [
+        '_headerPlaceHolderChanged(headerPlaceholder, headerImage, headerImageLoaded)'
+      ],
+
+      get header() {
+        return Polymer.dom(this.root).querySelector('app-header');
+      },
+
+      get headerbackground() {
+        return Polymer.dom(this.header.root).querySelector('#background');
+      },
+
+      get toast() {
+        var toast = Polymer.dom(this.root).querySelector('kk-toast');
+        return toast || this._setupToast();
+      },
+
+      get errorToast() {
+        var toast = Polymer.dom(this.root).querySelector('kk-error-toast');
+        return toast || this._setupErrorToast();
+      },
+
+      get temporaryData() {
+        var data = this._temporaryData  || {images: []};
+        this._temporaryData = data;
+        return data;
+      },
+
+      _headerPlaceHolderChanged: function(placeholder, image, loaded) {
+        console.log(placeholder, image, loaded);
+        if (placeholder && !loaded) {
+          this.header.customStyle['--app-header-background-front-layer'] = 'background-image: url(' + placeholder + ')';
+          this.async(function() {
+            this.header.updateStyles();
+            this.headerImageLoaded = true;
+          }, 100);
+        } else if (image && loaded) {
+          this.async(function() {
+            this.header.customStyle['--app-header-background-front-layer'] = 'background-image: url(' + image + ')';
+            var overlay = document.createElement('span');
+            overlay.style = 'background: rgba(0,0,0,0.72); position: absolute; top: 0; left: 0;right: 0; bottom: 0;';
+            this.headerbackground.appendChild(overlay);
+            this.header.updateStyles();
+          });
+        }
+      },
+
+      _setupToast: function() {
+        var toast = document.createElement('kk-toast');
+        Polymer.dom(this.root).appendChild(toast);
+        return toast;
+      },
+
+      _setupErrorToast: function() {
+        var toast = document.createElement('kk-error-toast');
+        Polymer.dom(this.root).appendChild(toast);
+        return toast;
+      },
+
+      _handleError: function(event) {
+        this.errorToast.show(`${event.detail.code}: ${event.detail.message}`);
+      },
+
+      showToast: function(event) {
+        this.toast.show(event.detail);
+      }
+
+    });
+  </script>
+</dom-module>

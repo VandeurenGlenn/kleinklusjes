@@ -1,0 +1,87 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<script>
+  var Basicelements = Basicelements || {};
+  /**
+   * @polymerBehavior Basicelements.ImageBehavior
+   */
+  ImageBehaviorImpl = {
+    properties: {
+      /**
+       * Url to image
+       */
+      image: String,
+
+      /**
+       * base64 placeholder
+       */
+      placeholder: String,
+
+      /**
+       * The target to append the imgElement to
+       */
+      target: {
+        type: HTMLElement,
+        value: function() {
+          return this;
+        }
+      },
+
+      /**
+       * @type {boolean} autoSize auto sizes the element when true
+       */
+      autoSize: {
+        type: Boolean,
+        value: true
+      },
+
+      size: {
+        type: Number,
+        value: 24
+      }
+    },
+
+    observers: [
+      '__sizeChanged(target, size, autoSize)'
+    ],
+
+    get _imgElement() {
+      var img = this.querySelector('img');
+      if (!img) {
+        img = document.createElement('img');
+        img.onload = this._imgLoaded();
+        img.style.width = '100%';
+        Polymer.dom(this).appendChild(img);
+      }
+      return img;
+    },
+
+    set placeholder(base64) {
+      if (base64) {
+        this.style.background = 'url(' + base64 + ')';
+        this.style.backgroundSize = 'cover';
+        this.style.backgroundRepeat = 'no-repeat';
+      }
+    },
+
+    set image(url) {
+      this._imgElement.src = url;
+    },
+
+    _imgLoaded: function() {
+      this.style.background = null;
+    },
+
+    __sizeChanged: function(target, size, auto) {
+      if (target && size && !auto) {
+        target.style.height = size + 'px;';
+        target.style.width = size + 'px';
+      } else if (target && auto) {
+        target.style.height = null;
+        target.style.width = null;
+      }
+    }
+  };
+
+  Basicelements.ImageBehavior = [ImageBehaviorImpl];
+
+</script>

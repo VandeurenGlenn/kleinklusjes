@@ -1,0 +1,169 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-resizable-behavior/iron-resizable-behavior.html">
+<dom-module id="kk-about">
+  <template>
+    <style>
+      :host {
+        display: flex;
+        flex-direction: column;
+      }
+      .title {
+        @apply(--kk-title);
+      }
+      .sub-title {
+        @apply(--kk-headline);
+      }
+      .text {
+        @apply(--kk-text);
+      }
+      .text.left, .text.right {
+        box-sizing: border-box;
+      }
+      .title, .sub-title, .text.left, .text.right {
+        padding-left: 32px;
+      }
+      .text.right {
+        /*padding-left: 268px;*/
+        padding-right: 32px;
+      }
+      .text-container h1 {
+        margin: 0;
+      }
+      .section-wrapper {
+        display: flex;
+        flex-direction: column;
+      }
+      kk-circle {
+        margin: 32px 0;
+        min-width: 128px;
+        min-height: 128px;
+        max-width: 236px;
+        max-height: 236px;
+      }
+      .horizontal {
+        @apply(--horizontal);
+      }
+      .flex {
+        flex: 1;
+        width: 100%;
+      }
+      @media (min-width: 640px) {
+        kk-circle.top {
+          margin-top: 32px;
+          margin-bottom: -64px;
+        }
+        kk-circle.bottom {
+          margin-bottom: 32px;
+          margin-top: -64px;
+        }
+      }
+      @media (min-width: 640px) {
+        kk-circle.top {
+          margin-top: 32px;
+          margin-bottom: -64px;
+        }
+        kk-circle.bottom {
+          margin-bottom: 32px;
+          margin-top: -64px;
+        }
+      }
+      @media (min-width: 960px) {
+        .section-wrapper {
+          margin: 0;
+          flex-direction: row;
+        }
+        kk-circle.top, kk-circle.bottom {
+          margin: 0;
+        }
+      }
+    </style>
+    <kk-section center-content>
+      <div class="section-wrapper">
+        <div class="horizontal">
+          <span class="flex"></span>
+          <kk-circle
+            src="[[imageLeft.image]]"
+            preload="[[imageLeft.placeholder]]"
+            class="top">
+          </kk-circle>
+        </div>
+        <div class="text-container">
+          <h1 class="title">Wie ik ben?</h1>
+          <h2 class="sub-title">Mijn naam is Stuard Vanardennen</h2>
+          <div class="text left">
+            <p>
+              Ik werk deelttijds in de Film/decor wereld
+              waar ik schilder/constructor ben.
+            </p>
+            <p>
+              Ik maak Decors voor films, series en festivals.
+              Het maken van decors is voor mij eerder een hobby dan werken.
+              Iets wat ik doe met veel liefde.
+            </p>
+          </div>
+        </div>
+      </div>
+    </kk-section>
+
+    <kk-section center-content>
+      <div class="section-wrapper">
+        <div class="text-container">
+          <div class="text right">
+            <p>
+              Tussen de Decorbouw door ben ik graag bezig daarom doe ik kleineklusjes tussen de decors door.
+            </p>
+            <p>
+              Ik ben niet je alledagse klusjesman. Ik zoek met jouw de beste oplossing voor jouw probleem of jouw wens naar een uniek item in jouw huis, tuin of jouw zaak.
+            </p>
+            <p>
+              Heb je vragen aarzel dan niet mij te <a href="#contact">contacteren</a>.
+            </p>
+          </div>
+        </div>
+        <div class="horizontal">
+          <span class="flex"></span>
+          <kk-circle
+            src="[[imageRight.image]]"
+            preload="[[imageRight.placeholder]]"
+            class="bottom">
+          </kk-circle>
+        </div>
+      </div>
+    </kk-section>
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'kk-about',
+        behaviors: [Polymer.IronResizableBehavior],
+
+        properties: {
+          imageLeft: String,
+
+          imageRight: String,
+
+          // mediumScreen
+        },
+
+        listeners: {
+          'iron-resize': '_onResize'
+        },
+
+        get _circleElements() {
+          return this.querySelectorAll('kk-circle');
+        },
+
+        _onResize: function() {
+          for (var i = 0; i < this._circleElements.length; i++) {
+            var el = this._circleElements[i];
+            var size = (this.getBoundingClientRect().width / 9);
+            el.style.height = size + 'px';
+            el.style.width = size + 'px';
+          }
+        }
+      });
+    })();
+  </script>
+</dom-module>

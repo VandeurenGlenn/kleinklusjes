@@ -1,0 +1,33 @@
+<script>
+  var Kk = Kk || {};
+  /**
+   * @polymerBehavior Kk.ErrorBehavior
+   */
+  Kk.ErrorBehavior = {
+    properties: {
+      error: Object
+    },
+    /**
+     * fires an error. The event fired is used to display an error
+     *
+     * @method fireError
+     * @param {string} code custom error code (used to provide an quick way identifying errors)
+     * @param {string} message an short error description (use the error code to provide an list of errors and their explainenation)
+     */
+    fireError: function(error) {
+      error = {
+        srcElement: this.tagName,
+        timeStamp: error.timestamp,
+        code: error.code,
+        message: error.message,
+        stack: error.stack
+      };
+      this.fire('error', error);
+    }
+    /**
+     * Fires when running the fireError method.
+     *
+     * @event error
+     */
+  };
+</script>

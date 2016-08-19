@@ -1,0 +1,43 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<script>
+  var Basicelements = Basicelements || {};
+  Basicelements.ToastBehavior = {
+    set opened(value) {
+      if (value) {
+        this.setAttribute('opened', '');
+      } else {
+        this.removeAttribute('opened');
+      }
+    },
+
+    get duration() {
+      return this.getAttribute('duration') || 5000;
+    },
+
+    get _toastContainer() {
+      return Polymer.dom(this.root).querySelector('.toast-container .text-container');
+    },
+
+    attached: function() {
+      this.close();
+    },
+
+    show: function(text) {
+      this.opened = true;
+      this._toastContainer.innerHTML = text;
+      Polymer.Base.transform('translate3d(0 , 0, 0)', this);
+      this.async(this.close.bind(this), this.duration);
+    },
+
+    close: function() {
+      Polymer.Base.transform('translate3d(0, 100px, 0)', this);
+      this.opened = false;
+    },
+
+    ok: function() {
+      this.cancelAsync(this.close.bind(this));
+      this.close();
+    }
+  };
+</script>

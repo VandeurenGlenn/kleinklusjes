@@ -1,0 +1,45 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/made-with/made-with.html">
+<dom-module id="kk-footer">
+  <template>
+    <style>
+      :host {
+        display: block;
+        background-color: #616161;
+        color: var(--primary-light-text-color);
+      }
+      .license {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      iron-icon[icon="copyright"] {
+        padding-right: 8px;
+        width: 12px;
+        height: 12px;
+      }
+      .bottom-bar {
+        font-size: 12px;
+        background-color: #212121;
+        padding: 8px 16px;
+        box-sizing: border-box;
+      }
+      made-with {
+        --made-width-link-color: var(--secondary-light-text-color);
+      }
+    </style>
+    <made-with author="Glenn Vandeuren" github-author="vandeurenglenn"></made-with>
+    <div class="bottom-bar">
+      <span class="license"><iron-icon icon="copyright"></iron-icon>2016 Glenn Vandeuren. Code licensed under the CC-BY-NC-SA-3.0 License. Documentation &amp; media are licensed under the CC BY 3.0 License</span>
+    </div>
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'kk-footer'
+      });
+    })();
+  </script>
+</dom-module>

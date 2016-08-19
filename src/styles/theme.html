@@ -1,0 +1,82 @@
+<style is="custom-style">
+  :root {
+    --primary-background: #FAFAFA;
+    /*icons & toolbar*/
+    --kk-primary-color: #212121;
+    --kk-accent: #00B8D4; /* Cyan a700 */
+
+    --focus-background: #0097A7; /* Cyan 900 */
+    /* text */
+    --primary-text-color: rgba(0, 0, 0, 0.87);
+    --secondary-text-color: rgba(0, 0, 0, 0.54);
+    --headline-text-color: rgba(0, 0, 0, 0.72);
+    /* text */
+    --primary-light-text-color: rgb(255, 255, 255);
+    --secondary-light-text-color: rgba(255, 255, 255, 0.70);
+    --secondary-light-text-color: rgba(255, 255, 255, 0.70);
+
+    --kk-accent-background: {
+      background: var(--kk-accent)
+    };
+
+    --kk-font-common: {
+      font-family: 'Roboto', 'Noto', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    };
+
+    --kk-title: {
+      @apply(--kk-font-common);
+      color: var(--primary-text-color);
+      font-size: 34px;
+      font-weight: 400;
+      letter-spacing: -.01em;
+      line-height: 40px;
+      margin: 0;
+      padding-bottom: 0.2em;
+    };
+
+    --kk-headline: {
+      color: var(--headline-text-color);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -.012em;
+      line-height: 32px;
+      margin: 0;
+      /*margin-bottom: 0.2em;*/
+    }
+
+    --kk-text: {
+      @apply(--kk-font-common);
+      color: var(--secondary-text-color);
+      line-height: 22px;
+      font-weight: 500;
+      margin: 0;
+      /*margin-bottom: 0.2em;*/
+    }
+
+    --kk-light-title: {
+      @apply(--kk-title);
+      color: var(--primary-light-text-color);
+    }
+
+    --kk-light-text: {
+      @apply(--kk-text);
+      color: var(--secondary-light-text-color);
+    }
+
+    --horizontal: {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  .horizontal {
+    @apply(--horizontal);
+  }
+  .center  {
+    align-items: center;
+  }
+  .center-center {
+    align-items: center;
+    justify-content: center;
+  }
+</style>

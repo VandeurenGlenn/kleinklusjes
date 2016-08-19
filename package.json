@@ -1,0 +1,33 @@
+{
+  "name": "kleinklusjes",
+  "version": "0.0.0",
+  "description": "Voor Kleine Decors en kleine klusjes",
+  "main": "index.html",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "gulp && polymer serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Basicelements/kleinklusjes.git"
+  },
+  "author": "Glenn Vandeuren <vandeurenglenn@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Basicelements/kleinklusjes/issues"
+  },
+  "homepage": "https://github.com/Basicelements/kleinklusjes#readme",
+  "devDependencies": {
+    "del": "^2.2.1",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-append": "^0.3.2",
+    "gulp-base64-img": "^0.1.1",
+    "gulp-lwip": "^0.1.2",
+    "gulp-replace": "^0.5.4",
+    "name-from-path": "^0.2.1",
+    "require-dir": "^0.3.0"
+  }
+}

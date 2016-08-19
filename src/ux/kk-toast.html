@@ -1,0 +1,60 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/src/behaviors/toast-behavior.html">
+<dom-module id="kk-toast">
+  <template>
+    <style>
+      :host {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 16px;
+        box-sizing: border-box;
+        opacity: 0;
+        -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+        transition: transform 0.3s, opacity 0.3s;
+      }
+      :host([opened]) {
+        opacity: 1;
+      }
+      .toast-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 8px 16px;
+        min-height: 48px;
+        min-width: 288px;
+        box-sizing: border-box;
+        background-color: #FAFAFA;
+        color: #rgba(0, 0, 0, 0.70);
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+      }
+      .flex {
+        flex: 1;
+        width: 100%;
+      }
+      .ok {
+        color: #FF9100;
+        padding: 0 8px;
+        cursor: pointer;
+      }
+    </style>
+    <div class="toast-container">
+      <div class="text-container"></div>
+      <span class="flex"></span>
+      <span class="ok" on-tap="ok">ok</span>
+    </div>
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'kk-toast',
+        behaviors: [Basicelements.ToastBehavior]
+      });
+    })();
+  </script>
+</dom-module>

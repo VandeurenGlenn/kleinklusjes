@@ -1,0 +1,46 @@
+<script>
+  var Basicelements = Basicelements || {};
+  /**
+   * @polymerBehavior Basicelements.ImageCollectionBehavior
+   */
+  Basicelements.ImageCollectionBehavior = {
+    properties: {
+      /**
+       * An collection of images
+       */
+      images: Object
+    },
+
+    _forImages: function(images, name, item) {
+      for (var i = 0; i < images.length; i++) {
+        if (images[i].name === name) {
+          if (item) {
+            return images[i][item];
+          } else {
+            return images[i];
+          }
+        }
+      }
+    },
+
+    /**
+     * returns the desired placeholder
+     * @return {string} placeholder base64
+     */
+    computePlaceholder: function(images, name) {
+      return this._forImages(images, name, 'placeholder');
+    },
+
+    /**
+     * returns the desired image
+     * @return {string} image url to image
+     */
+    computeImage: function(images, name) {
+      return this._forImages(images, name, 'image');
+    },
+
+    computeImageObject: function(images, name) {
+      return this._forImages(images, name);
+    }
+  }
+</script>

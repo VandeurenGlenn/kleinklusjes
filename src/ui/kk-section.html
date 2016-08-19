@@ -1,0 +1,115 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<dom-module id="kk-section">
+  <template>
+    <style>
+      :root {
+        --kk-section: {
+          padding: 32px 16px;
+          color: var(--kk-section-color);
+          max-width: 1200px;
+          box-sizing: border-box;
+        }
+      }
+      :host {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 360px;
+        position: relative;
+      }
+      :host:not([image]) {
+        background: var(--kk-section-background, --primary-bakground);
+      }
+      .content {
+        @apply(--kk-section);
+        flex: 1;
+        width: 100%;
+        z-index: 100;
+        position: relative;
+      }
+      :host([center-content]) .content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      :host ::content .text {
+        display: flex;
+        flex-direction: column;
+      }
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity ease-in 0.2s;
+        z-index: 0;
+      }
+      :host([loaded]) img {
+        opacity: 1;
+      }
+      :host([loaded]) #placeholder {
+        opacity: 0;
+        transition: opacity ease-out 0.2s;
+      }
+      #placeholder {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        opacity: 1;
+      }
+    </style>
+    <div class="content">
+      <content></content>
+    </div>
+    <img />
+    <div id="placeholder">
+
+    </div>
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'kk-section',
+
+        properties: {
+          image: {
+            type: String,
+          },
+
+          preload: String,
+
+          loaded: {
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true
+          }
+        },
+
+        observers: [
+          '_loadImage(preload, image)'
+        ],
+
+        _loadImage: function(preload, image) {
+          this.$.placeholder.style = 'background:url(' + preload + '); background-size: cover; background-repeat: no-repeat;';
+          if (image) {
+            var img = this.$$('img');
+            img.onload = this.onImageLoad();
+            img.src = image;
+          }
+        },
+
+        onImageLoad: function() {
+          this.async(function() {
+            this.loaded = true;
+          }.bind(this), 100);
+        }
+      });
+    })();
+  </script>
+</dom-module>

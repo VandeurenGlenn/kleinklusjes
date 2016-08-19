@@ -1,0 +1,9 @@
+{
+  "name": "kleinklusjes",
+  "short_name": "kleinklusjes",
+  "description": "Voor Kleine Decors en kleine klusjes",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#555",
+  "theme_color": "#333"
+}

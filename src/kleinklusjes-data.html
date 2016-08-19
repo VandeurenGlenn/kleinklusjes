@@ -1,0 +1,28 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<dom-module id="kleinklusjes-data">
+  <template>
+    <style>
+      :host {
+        display: none;
+      }
+    </style>
+
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+	    Polymer({
+        is: 'kleinklusjes-data',
+
+        properties: {
+          images: {
+            type: Array,
+            notify: true,
+            value: images
+          }
+        }
+      });
+    })();
+  </script>
+</dom-module>

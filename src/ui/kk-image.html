@@ -1,0 +1,91 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<dom-module id="kk-image">
+  <template>
+    <style>
+      :host {
+        display: block;
+        width: 236px;
+        height: 236px;
+      }
+      .image {
+        width: 100%;
+        opacity: 1;
+        transition: opacity ease-in 0.16ms;
+      }
+      :host([cover]) {
+        /*position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;*/
+      }
+      :host([loading]) .image {
+        opacity: 0;
+      }
+      .preload {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <!-- <template is="dom-if" if="[[loading]]" restamp="true">
+      <img class="preload" src="[[preload]]"/>
+    </template>
+    <img class="preload" src="[[preload]]"/>
+    <img class="image"/> -->
+    <div id="image" class="">
+
+    </div>
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'kk-image',
+
+        properties: {
+          src: {
+            type: String
+          },
+
+          preload: String,
+
+          loaded: {
+            type: Boolean,
+            value: true
+          }
+        },
+
+        observers: [
+          '_loadImage(preload, src)'
+        ],
+
+        get _imgElement() {
+          return this.querySelector('.image');
+        },
+
+        _loadImage: function(preload, src) {
+          console.log(preload, src);
+          this.$.image.style = 'background:url(' + src || preload + '); background-size: cover; background-repeat: no-repeat;';
+          // this._imgElement.onload = this._onImageLoaded();
+          // this._imgElement.src = src;
+        },
+
+        _onImageLoaded: function() {
+          if (this._resolveSrc(this.src) !== this._imgElement.src) {
+            return;
+          }
+          this.async(function() {
+
+            this.loaded = true;
+          }, false, 100);
+        },
+
+        _resolveSrc: function(testSrc) {
+          var baseURI = this.ownerDocument.baseURI;
+          return (new URL(Polymer.ResolveUrl.resolveUrl(testSrc, baseURI), baseURI)).href;
+        }
+      });
+    })();
+  </script>
+</dom-module>

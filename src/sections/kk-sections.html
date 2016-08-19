@@ -1,0 +1,64 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-resizable-behavior/iron-resizable-behavior.html">
+<link rel="import" href="../behaviors/image-collection-behavior.html">
+<link rel="import" href="kk-about.html">
+<link rel="import" href="kk-what.html">
+<link rel="import" href="kk-jobs.html">
+<link rel="import" href="kk-contact.html">
+<dom-module id="kk-sections">
+  <template>
+    <style>
+      :host {
+        display: block;
+        background: #FAFAFA;
+      }
+      kk-about , kk-jobs  {
+        padding-top: 48px;
+      }
+      kk-what {
+        padding-top: 0;
+      }
+      kk-contact {
+        background-color: #202020;
+      }
+    </style>
+    <kk-about id="wie" image-left="[[imageLeft]]" image-right="[[imageRight]]"></kk-about>
+    <kk-what id="wat"></kk-what>
+    <kk-jobs id="klusjes" images="[[images]]"></kk-jobs>
+    <kk-contact id="contact" small-screen="[[smallScreen]]"></kk-contact>
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'kk-sections',
+        behaviors: [Polymer.IronResizableBehavior, Basicelements.ImageCollectionBehavior],
+
+        properties: {
+          imageLeft: {
+            type: String,
+            computed: 'computeImageObject(images, "about_picture_left")'
+          },
+          imageRight: {
+            type: String,
+            computed: 'computeImageObject(images, "about_right")'
+          },
+          smallScreen: Boolean
+        },
+
+        get _whatElement() {
+          return this.querySelector('kk-what');
+        },
+
+        ready: function() {
+          this.async(function() {
+            this._whatElement.customStyle['--kk-section-background'] = '#202020';
+            this._whatElement.customStyle['--kk-section-color'] = '#FEFEFE';
+            this._whatElement.updateStyles();
+          }, 100)
+        }
+      });
+    })();
+  </script>
+</dom-module>

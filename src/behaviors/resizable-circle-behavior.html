@@ -1,0 +1,26 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-resizable-behavior/iron-resizable-behavior.html">
+
+<script>
+  var Basicelements = Basicelements || {};
+  Basicelements.ResizableCirlcleBehaviorImpl = {
+    listeners: {
+      'iron-resize': '_onResize'
+    },
+
+    get _circleElements() {
+      return this.querySelectorAll('kk-circle');
+    },
+
+    _onResize: function() {
+      for (var i = 0; i < this._circleElements.length; i++) {
+        var el = this._circleElements[i];
+        var size = (this.getBoundingClientRect().width / 4) - 32;
+        el.style.height = size + 'px';
+        el.style.width = size + 'px';
+      }
+    }
+  };
+
+  Basicelements.ResizableCirlcleBehavior = [Polymer.IronResizableBehavior, Basicelements.ResizableCirlcleBehaviorImpl];
+</script>

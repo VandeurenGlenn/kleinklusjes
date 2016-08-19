@@ -1,0 +1,82 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../behaviors/resizable-circle-behavior.html">
+<link rel="import" href="../behaviors/image-collection-behavior.html">
+<link rel="import" href="../ui/kk-circle.html">
+<dom-module id="kk-jobs">
+  <template>
+    <style>
+      :host {
+        display: block;
+        /*background: #000;*/
+      }
+      .title {
+        color: rgb(165,112,33);
+      }
+      kk-badge {
+        height: 336px;
+        width: 336px;
+      }
+      kk-circle {
+        float: left;
+        margin: 16px;
+        min-width: 128px;
+        min-height: 128px;
+        max-width: 260px;
+        max-height: 260px;
+      }
+      @media (min-width: 640px;) {
+        .panel {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          align-self: center;
+        }
+      }
+      @media (max-width: 1360px) {
+        kk-section ::content .content {
+          padding: 0 !important;
+        }
+      }
+    </style>
+    <kk-section center-content>
+      <div class="panel">
+        <kk-circle src="[[computeImage(images, 'kast_op_maat')]]" preload="[[computePlaceholder(images, 'kast_op_maat')]]" title="Kasten op maat"></kk-circle>
+        <kk-circle src="[[computeImage(images, 'storm')]]" preload="[[computePlaceholder(images, 'storm')]]" title="Unieke decoraties"></kk-circle>
+        <kk-circle src="[[computeImage(images, 'tomorrowland_2016')]]" preload="[[computePlaceholder(images, 'tomorrowland_2016')]]" title="Feest decoraties"></kk-circle>
+        <kk-circle src="[[computeImage(images, 'gezandstraalde_eiken_balk')]]" preload="[[computePlaceholder(images, 'gezandstraalde_eiken_balk')]]" title="Zandstralen van hout"></kk-circle>
+      </div>
+    </kk-section>
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'kk-jobs',
+        behaviors: [Basicelements.ResizableCirlcleBehavior, Basicelements.ImageCollectionBehavior],
+
+        properties: {
+          images: Object
+        },
+
+        listeners: {
+          'iron-resize': '_onResize'
+        },
+
+        get _circleElements() {
+          return this.querySelectorAll('kk-circle');
+        },
+
+        _onResize: function() {
+          for (var i = 0; i < this._circleElements.length; i++) {
+            var el = this._circleElements[i];
+            var size = (this.getBoundingClientRect().width / 4) - 32;
+            el.style.height = size + 'px';
+            el.style.width = size + 'px';
+          }
+        }
+      });
+    })();
+  </script>
+</dom-module>

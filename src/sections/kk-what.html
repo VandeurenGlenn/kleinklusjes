@@ -1,0 +1,159 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/src/ui/kk-badge.html">
+<dom-module id="kk-what">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      .title {
+        color: rgb(165,112,33);
+        margin: 0;
+      }
+      kk-section {
+        --primary-background: #000;
+        --primary-text-color: #FFF;
+        padding: 64px 0;
+      }
+      kk-badge {
+        margin: 8px;
+        width: 256px;
+      }
+      .badges-wrapper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+      }
+      .badges {
+        display: block;
+        padding-top: 64px;
+        /*padding-left: 256px;*/
+        /*padding-right: 64px;*/
+        box-sizing: border-box;
+        width: calc(100% - 174px);
+      }
+      .flex {
+        flex: 1;
+        width: 100%;
+      }
+      @media (max-width: 1399px) {
+        kk-badge {
+          /*width: calc(100% / 3 - 86px);*/
+          margin: 16px 32px;
+          float: left;
+        }
+        kk-section ::content .content {
+          flex-direction: column !important;
+        }
+      }
+      @media (max-width: 1199px) {
+        kk-badge {
+          width: calc(100% / 2 - 64px);
+        }
+      }
+      @media (max-width: 879px) {
+        kk-badge {
+          width: auto;
+          float: none;
+        }
+        .badges {
+          width: 100%;
+          max-width: 356px;
+          min-width: calc(256px + 56px);
+        }
+      }
+      @media (min-width: 1400px) {
+        kk-section ::content .content {
+          align-items: flex-end !important;
+        }
+        .badges {
+          /*position: absolute;
+          right: 64px;
+          top: 0;
+          bottom: 0;*/
+          padding: 0;
+          align-items: flex-end;
+          justify-content: center;
+          display: flex;
+          flex-direction: column;
+          width: 50%;
+        }
+        .text-container {
+          width: 50%;
+        }
+        .badges-wrapper {
+          flex-direction: row;
+          align-items: flex-end;
+          justify-content: flex-end;
+          width: 50%;
+        }
+      }
+
+    </style>
+    <kk-section center-content>
+      <div class="text-container">
+        <h1 class="title">Wat voor klusjes?</h1>
+
+        <p>
+          Ik maak u het leven graag makkelijker.<br>
+          Ik doe allerlei klussen.<br>
+          Wanneer je  geen tijd hebt om te klussen, of wanneer je iets speciaal nodig hebt.<br>
+          Help ik u graag met alle voorkomende problemen.
+        </p>
+
+
+        <p>
+          Deur/kast Klinken vervangen,<br>
+          Lampen monteren,<br>
+          kastjes op maat maken,<br>
+          Kleine zandstraal  projecten,<br>
+          Afval weg brengen,<br>
+          Kast op maat maken,<br>
+          Noem maar op..
+        </p>
+
+
+        <p>
+          Maar ook allerhander op maat gemaakte spullen.<br>
+          Moest je kleine Decor spullen nodig hebben voor een feest of gewoon als decoratie kan ik dit voor je maken.<br>
+          Speciale schilderingen of unieke constructies is geen enkel probleem.
+        </p>
+
+
+        <p>
+          Unieke speeltuin voor je kindere,<br>
+          Overdekt terras met een special look,<br>
+          Speciale Bloempotten,<br>
+          Tafels, bankjes,<br>
+           een unieke eltalage voor jouw zaak..<br>
+          Niet is te zot..
+        </p>
+
+        <p>
+          Ik help u graag verder en zorg er voor dat we samen het gewenste resulaat bekomen.
+        </p>
+      </div>
+      <div class="badges-wrapper">
+        <!-- <span class="flex"></span> -->
+        <div class="badges">
+          <kk-badge icon="lightbulb" title="monteren en vervangen van lampen/verlichting" always-open></kk-badge>
+          <kk-badge icon="paint" title="unieke maar ook normale schilderwerken" always-open></kk-badge>
+          <kk-badge icon="gesture" title="kasten op maat" always-open></kk-badge>
+          <kk-badge icon="palette" title="unieke decoratie" always-open></kk-badge>
+          <kk-badge icon="cake" title="feest decoratie" always-open></kk-badge>
+          <kk-badge icon="delete" title="leegmaken van huizen/wegbrengen van afval" always-open></kk-badge>
+        </div>
+      </div>
+    </kk-section>
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'kk-what'
+      });
+    })();
+  </script>
+</dom-module>
