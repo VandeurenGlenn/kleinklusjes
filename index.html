@@ -5,7 +5,7 @@
     <title>kleinklusjes</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
     <script>
       // load webcomponents polyfills (when needed)
       (function() {
@@ -16,7 +16,7 @@
         } else {
           // polyfill web components
           var e = document.createElement('script');
-          e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+          e.src = 'bower_components/webcomponentsjs/webcomponents-lite.min.js';
           document.head.appendChild(e);
         }
       })();
@@ -24,11 +24,11 @@
       // load service worker (when supported)
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/service-worker.js');
+          navigator.serviceWorker.register('service-worker.js');
         });
       }
     </script>
-    <link rel="import" href="/src/kleinklusjes-app.html">
+    <link rel="import" href="src/kleinklusjes-app.html">
     <style>
       body {
         margin: 0;
