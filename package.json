@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "gulp && polymer serve"
+    "serve": "gulp && polymer serve",
+    "build": "gulp && polymer build"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "gulp-lwip": "^0.1.2",
     "gulp-replace": "^0.5.4",
     "name-from-path": "^0.2.1",
-    "require-dir": "^0.3.0"
+    "require-dir": "^0.3.0",
+    "sw-precache": "^4.0.0"
   }
 }

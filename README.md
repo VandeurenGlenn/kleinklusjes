@@ -6,16 +6,16 @@ Voor Kleine Decors en kleine klusjes
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
 
-## Viewing Your Application
+## Viewing The Application
 
 ```
-$ polymer serve
+$ npm run serve
 ```
 
-## Building Your Application
+## Building The Application
 
 ```
-$ polymer build
+$ npm run build
 ```
 
 This will create a `build/` folder with `bundled/` and `unbundled/` sub-folders
