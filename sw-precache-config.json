@@ -1,0 +1,10 @@
+{
+  "staticFileGlobs": [
+    "src/css/**.css",
+    "src/**.html",
+    "dist/**.html",
+    "images/**.*",
+    "src/js/**.js"
+  ],
+  "stripPrefix": "src/"
+}
