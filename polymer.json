@@ -1,4 +1,4 @@
 {
-  "entrypoint": "index.html",
-  "shell": "src/kleinklusjes-app.html"
+  "entrypoint": "/index.html",
+  "shell": "/src/kleinklusjes-app.html"
 }
