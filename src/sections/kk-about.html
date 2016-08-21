@@ -19,12 +19,8 @@
       .text.left, .text.right {
         box-sizing: border-box;
       }
-      .title, .sub-title, .text.left, .text.right {
-        padding-left: 32px;
-      }
-      .text.right {
-        /*padding-left: 268px;*/
-        padding-right: 32px;
+      .text-container {
+        max-width: 720px;
       }
       .text-container h1 {
         margin: 0;
@@ -57,17 +53,14 @@
           margin-top: -64px;
         }
       }
-      @media (min-width: 640px) {
-        kk-circle.top {
-          margin-top: 32px;
-          margin-bottom: -64px;
-        }
-        kk-circle.bottom {
-          margin-bottom: 32px;
-          margin-top: -64px;
-        }
-      }
       @media (min-width: 960px) {
+        .title, .sub-title, .text.left {
+          padding-left: 32px;
+        }
+        .text.right {
+          /*padding-left: 268px;*/
+          padding-right: 32px;
+        }
         .section-wrapper {
           margin: 0;
           flex-direction: row;

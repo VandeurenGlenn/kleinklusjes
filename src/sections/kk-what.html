@@ -7,13 +7,18 @@
         display: block;
       }
       .title {
+        @apply(--kk-title);
         color: rgb(165,112,33);
         margin: 0;
+      }
+      p {
+        @apply(--kk-text);
+        padding-top: 16px;
       }
       kk-section {
         --primary-background: #000;
         --primary-text-color: #FFF;
-        padding: 64px 0;
+        padding: 16px 0;
       }
       kk-badge {
         margin: 8px;

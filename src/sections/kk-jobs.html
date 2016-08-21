@@ -10,6 +10,7 @@
         /*background: #000;*/
       }
       .title {
+        /*@apply()*/
         color: rgb(165,112,33);
       }
       kk-badge {
@@ -36,6 +37,15 @@
       @media (max-width: 1360px) {
         kk-section ::content .content {
           padding: 0 !important;
+        }
+      }
+      @media (max-width: 639px) {
+        kk-circle {
+          height: 128px;
+          width: 128px;
+        }
+        .panel {
+          width: calc(2 * 128px + 64px)
         }
       }
     </style>
